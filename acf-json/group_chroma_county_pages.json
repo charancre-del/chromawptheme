@@ -1,0 +1,22 @@
+{
+  "key": "group_chroma_county_pages",
+  "title": "County Landing Pages",
+  "fields": [],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "template-parts/landing/dual-variant.php"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Placeholder group for county-level SEO copy and CTAs."
+}

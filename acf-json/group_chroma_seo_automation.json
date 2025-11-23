@@ -1,0 +1,22 @@
+{
+  "key": "group_chroma_seo_automation",
+  "title": "SEO Automation",
+  "fields": [],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "chroma-settings"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Placeholder group for SEO automation settings, sitemap, and schema controls."
+}
