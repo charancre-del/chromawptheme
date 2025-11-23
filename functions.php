@@ -1,14 +1,48 @@
 <?php
 /**
- * Theme setup and enqueue hooks.
+ * Core helpers for the Chroma theme.
  */
 
-if ( ! defined( 'CHROMA_THEME_VERSION' ) ) {
-  define( 'CHROMA_THEME_VERSION', wp_get_theme()->get( 'Version' ) ?: '1.0.0' );
+if ( ! function_exists( 'chroma_get_option' ) ) {
+  /**
+   * Fetch an option from the database or theme mods with a fallback.
+   *
+   * @param string $key     Option key.
+   * @param mixed  $default Default value if nothing is stored.
+   *
+   * @return mixed
+   */
+  function chroma_get_option( $key, $default = '' ) {
+    $value = get_option( $key );
+
+    if ( ! empty( $value ) ) {
+      return $value;
+    }
+
+    $mod = get_theme_mod( $key );
+
+    if ( ! empty( $mod ) ) {
+      return $mod;
+    }
+
+    return $default;
+  }
 }
 
-add_action( 'after_setup_theme', function() {
-  add_theme_support( 'title-tag' );
-} );
+if ( ! function_exists( 'chroma_archive_cta' ) ) {
+  /**
+   * Render a CTA button when a URL is provided.
+   *
+   * @param string $url     Destination URL.
+   * @param string $label   Anchor text.
+   * @param string $variant Visual treatment.
+   */
+  function chroma_archive_cta( $url, $label, $variant = 'primary' ) {
+    if ( empty( $url ) ) {
+      return;
+    }
 
-require get_template_directory() . '/inc/enqueue.php';
+    $classes = 'chroma-button chroma-button--' . ( 'ghost' === $variant ? 'ghost' : 'primary' );
+    echo '<a class="' . esc_attr( $classes ) . '" href="' . esc_url( $url ) . '">' . esc_html( $label ) . '</a>';
+  }
+}
