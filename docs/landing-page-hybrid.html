@@ -30,6 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -76,9 +77,6 @@
     .tab-content { display: none; animation: fadeIn .45s ease; }
     .tab-content.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity:1; transform: translateY(0);} }
-    .fan-blade { transition: transform .4s ease, box-shadow .3s ease, background-color .3s ease, color .3s ease; transform-origin: bottom center; }
-    .fan-blade:hover { transform: scale(1.03) rotate(var(--rotate,0deg)); box-shadow: 0 20px 50px -18px rgba(74,108,124,0.28); }
-    .fan-blade.active { background: #2F4858; color: #fff; box-shadow: 0 22px 50px -18px rgba(74,108,124,0.4); }
   </style>
 </head>
 <body class="bg-brand-cream text-brand-ink antialiased selection:bg-chroma-red selection:text-white">
@@ -98,6 +96,7 @@
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-brand-ink/70">
         <a href="#programs" class="hover:text-chroma-red">Programs</a>
+        <a href="#curriculum" class="hover:text-chroma-blue">Curriculum</a>
         <a href="#prismpath" class="hover:text-chroma-blue">Prismpath™</a>
         <a href="#schedule" class="hover:text-chroma-yellow">Daily Rhythm</a>
         <a href="#locations" class="hover:text-chroma-green">Locations</a>
@@ -123,6 +122,7 @@
       </div>
       <nav class="flex-1 px-6 py-6 text-lg font-semibold text-brand-ink space-y-6">
         <a href="#programs" class="block hover:text-chroma-red">Programs</a>
+        <a href="#curriculum" class="block hover:text-chroma-blue">Curriculum</a>
         <a href="#prismpath" class="block hover:text-chroma-blue">Prismpath™</a>
         <a href="#schedule" class="block hover:text-chroma-yellow">Daily Rhythm</a>
         <a href="#locations" class="block hover:text-chroma-green">Locations</a>
@@ -254,34 +254,29 @@
       </div>
     </section>
 
-    <section id="curriculum-fan" class="py-20 bg-white border-b border-chroma-blue/10">
+    <section id="curriculum" class="py-20 bg-brand-cream border-y border-chroma-blue/10">
       <div class="max-w-6xl mx-auto px-4 lg:px-6 grid lg:grid-cols-2 gap-12 items-center">
         <div class="space-y-5 fade-in-up">
-          <span class="text-chroma-red font-bold tracking-[0.2em] text-[11px] uppercase">Curriculum Fan</span>
-          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-ink">The art of growing up, translated into daily practice.</h2>
-          <p class="text-brand-ink/70 text-sm md:text-base">Each Chroma program balances physical, emotional, social, academic, and creative growth. Tap a blade of the fan to see how Prismpath™ tunes the focus for every age.</p>
-          <ul class="space-y-3 text-sm text-brand-ink/70">
-            <li class="flex items-start gap-2"><span class="text-chroma-red mt-0.5">●</span>Age-specific focus built from the Prismpath™ spectrum.</li>
-            <li class="flex items-start gap-2"><span class="text-chroma-blue mt-0.5">●</span>Language, numeracy, and creative thinking woven into play.</li>
-            <li class="flex items-start gap-2"><span class="text-chroma-green mt-0.5">●</span>Emotional security and social confidence at every stage.</li>
-          </ul>
-        </div>
-        <div class="relative h-[360px] fade-in-up">
-          <div class="absolute inset-0 flex items-end justify-center pointer-events-none">
-            <div class="w-full max-w-md bg-white border border-chroma-blue/15 shadow-soft rounded-[2rem] p-6 text-center">
-              <p class="text-[11px] uppercase tracking-[0.22em] font-semibold text-brand-ink/60" id="fan-focus-label">Foundation</p>
-              <h3 class="font-serif text-2xl font-bold text-brand-ink mt-2" id="fan-title">Infant Care</h3>
-              <p class="text-sm text-brand-ink/70 mt-3" id="fan-desc">Low ratios, safe sleep practices, responsive caregiving, and sensory play in a peaceful, predictable environment.</p>
-            </div>
+          <span class="text-chroma-blue font-bold tracking-[0.2em] text-[11px] uppercase">The Chroma Spectrum™ Curriculum</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-ink">A curriculum that shifts as your child grows</h2>
+          <p class="text-brand-ink/70 text-sm md:text-base">Our program is built around five pillars – physical, emotional, social, academic, and creative development. The balance changes at each age so your child gets exactly what they need, when they need it.</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <button id="btn-cur-infant" onclick="updateCurriculum('infant')" class="px-4 py-2 rounded-full font-semibold bg-chroma-blue text-white shadow-soft">Infant</button>
+            <button id="btn-cur-toddler" onclick="updateCurriculum('toddler')" class="px-4 py-2 rounded-full font-semibold bg-white text-brand-ink/70 border border-chroma-blue/20 hover:border-chroma-blue">Toddler</button>
+            <button id="btn-cur-preschool" onclick="updateCurriculum('preschool')" class="px-4 py-2 rounded-full font-semibold bg-white text-brand-ink/70 border border-chroma-blue/20 hover:border-chroma-blue">Preschool</button>
+            <button id="btn-cur-prep" onclick="updateCurriculum('prep')" class="px-4 py-2 rounded-full font-semibold bg-white text-brand-ink/70 border border-chroma-blue/20 hover:border-chroma-blue">Pre-K Prep</button>
+            <button id="btn-cur-prek" onclick="updateCurriculum('prek')" class="px-4 py-2 rounded-full font-semibold bg-white text-brand-ink/70 border border-chroma-blue/20 hover:border-chroma-blue">GA Pre-K</button>
+            <button id="btn-cur-afterschool" onclick="updateCurriculum('afterschool')" class="px-4 py-2 rounded-full font-semibold bg-white text-brand-ink/70 border border-chroma-blue/20 hover:border-chroma-blue">After School</button>
           </div>
-          <div class="absolute inset-0 flex items-end justify-center">
-            <div class="relative w-full max-w-lg h-full flex items-end justify-center">
-              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:-26deg; transform: rotate(-26deg) translateY(0);" data-fan-program="infant">Infant</button>
-              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:-14deg; transform: rotate(-14deg) translateY(0);" data-fan-program="toddler">Toddler</button>
-              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:0deg; transform: rotate(0deg) translateY(0);" data-fan-program="preschool">Preschool</button>
-              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:14deg; transform: rotate(14deg) translateY(0);" data-fan-program="prep">Pre-K Prep</button>
-              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:26deg; transform: rotate(26deg) translateY(0);" data-fan-program="prek">GA Pre-K</button>
-              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:38deg; transform: rotate(38deg) translateY(0);" data-fan-program="afterschool">After School</button>
+          <div class="bg-white rounded-3xl border-l-4 border-chroma-red shadow-soft p-6 md:p-7">
+            <h3 id="curriculum-title" class="font-serif text-xl md:text-2xl font-bold text-brand-ink mb-2">Foundation Phase</h3>
+            <p id="curriculum-desc" class="text-brand-ink/70 text-sm md:text-base">Infant classrooms emphasize emotional security, attachment, physical health, and sensory experiences. Academics are embedded through language-rich interactions.</p>
+          </div>
+        </div>
+        <div class="fade-in-up">
+          <div class="bg-white rounded-[2.5rem] shadow-soft border border-chroma-blue/10 p-6">
+            <div class="relative h-[340px] md:h-[380px]">
+              <canvas id="curriculumChart" aria-label="Curriculum focus radar chart" role="img"></canvas>
             </div>
           </div>
         </div>
@@ -348,11 +343,11 @@
         </div>
         <div class="flex justify-center mb-12">
           <div class="bg-white border border-chroma-blue/15 p-1 rounded-full inline-flex">
-            <button onclick="switchTab('infant')" id="btn-infant" class="px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 bg-chroma-blue text-white shadow-soft">Infants</button>
-            <button onclick="switchTab('toddler')" id="btn-toddler" class="px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 text-brand-ink/60 hover:text-chroma-blue">Toddlers</button>
-            <button onclick="switchTab('prek')" id="btn-prek" class="px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 text-brand-ink/60 hover:text-chroma-blue">Pre-K</button>
+              <button onclick="switchTab('infant')" id="btn-infant" class="schedule-tab px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 bg-chroma-blue text-white shadow-soft">Infants</button>
+              <button onclick="switchTab('toddler')" id="btn-toddler" class="schedule-tab px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 text-brand-ink/60 hover:text-chroma-blue">Toddlers</button>
+              <button onclick="switchTab('prek')" id="btn-prek" class="schedule-tab px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 text-brand-ink/60 hover:text-chroma-blue">Pre-K</button>
+            </div>
           </div>
-        </div>
         <div id="tab-infant" class="tab-content active">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div class="bg-chroma-blueLight rounded-[3rem] p-10 h-full">
@@ -676,6 +671,45 @@
         }
       };
 
+      const curriculumConfig = {
+        infant: {
+          title: 'Foundation Phase',
+          desc: 'Infant classrooms emphasize emotional security, attachment, physical health, and sensory experiences. Academics are embedded through language-rich interactions.',
+          color: '#D67D6B',
+          data: [90, 90, 40, 15, 40]
+        },
+        toddler: {
+          title: 'Discovery Phase',
+          desc: 'Toddlers explore movement, language, early problem-solving, and social skills through guided play and routines.',
+          color: '#4A6C7C',
+          data: [85, 75, 65, 30, 70]
+        },
+        preschool: {
+          title: 'Exploration Phase',
+          desc: 'Preschoolers work on early literacy, math concepts, dramatic play, and collaborative projects, supported by strong routines.',
+          color: '#E6BE75',
+          data: [75, 65, 70, 55, 80]
+        },
+        prep: {
+          title: 'Pre-K Prep Phase',
+          desc: 'Children build stamina for small-group work, early writing, and multi-step directions while strengthening self-regulation.',
+          color: '#2F4858',
+          data: [65, 60, 75, 75, 70]
+        },
+        prek: {
+          title: 'GA Pre-K Readiness',
+          desc: 'Balanced academic readiness, social-emotional learning, and joyful experiences aligned with GA standards.',
+          color: '#4A6C7C',
+          data: [60, 60, 80, 90, 70]
+        },
+        afterschool: {
+          title: 'Enrichment Phase',
+          desc: 'School-age programming offers homework help, social clubs, athletic play, and creative enrichment for older children.',
+          color: '#E6BE75',
+          data: [50, 70, 85, 75, 80]
+        }
+      };
+
       window.showWizardResult = function (ageKey) {
         const wizardStep = document.getElementById('wizard-step-1');
         const wizardResult = document.getElementById('wizard-result');
@@ -697,39 +731,89 @@
         wizardResult.classList.add('hidden');
       };
 
-      const fanButtons = document.querySelectorAll('[data-fan-program]');
-      const fanTitle = document.getElementById('fan-title');
-      const fanDesc = document.getElementById('fan-desc');
-      const fanLabel = document.getElementById('fan-focus-label');
+      const curriculumTitle = document.getElementById('curriculum-title');
+      const curriculumDesc = document.getElementById('curriculum-desc');
+      const chartCanvas = document.getElementById('curriculumChart');
+      const curriculumButtons = document.querySelectorAll('[id^="btn-cur-"]');
+      const curriculumLabels = ['Physical', 'Emotional', 'Social', 'Academic', 'Creative'];
+      let curriculumChart;
 
-      function setFanProgram(key) {
-        const program = programs[key];
-        if (!program || !fanButtons.length || !fanTitle || !fanDesc || !fanLabel) return;
-        fanButtons.forEach((btn) => {
-          btn.classList.remove('active');
-          if (btn.dataset.fanProgram === key) {
-            btn.classList.add('active');
+      if (chartCanvas && window.Chart) {
+        const base = curriculumConfig.infant;
+        curriculumChart = new Chart(chartCanvas.getContext('2d'), {
+          type: 'radar',
+          data: {
+            labels: curriculumLabels,
+            datasets: [
+              {
+                label: 'Focus',
+                data: base.data,
+                borderColor: base.color,
+                backgroundColor: base.color + '33',
+                borderWidth: 2,
+                pointBackgroundColor: '#ffffff',
+                pointBorderColor: base.color,
+                pointRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              r: {
+                angleLines: { color: '#e5e7eb' },
+                grid: { color: '#e5e7eb' },
+                suggestedMin: 0,
+                suggestedMax: 100,
+                ticks: { display: false },
+                pointLabels: {
+                  font: { family: 'Outfit', size: 12 },
+                  color: '#263238'
+                }
+              }
+            }
           }
         });
-        fanTitle.textContent = program.title;
-        fanDesc.textContent = program.desc;
-        fanLabel.textContent = program.focus || 'Curriculum';
       }
 
-      fanButtons.forEach((btn) => {
-        btn.addEventListener('click', () => setFanProgram(btn.dataset.fanProgram));
-      });
-
-      setFanProgram('infant');
-
-      function switchTabInternal(tabName) {
-        document.querySelectorAll('.tab-content').forEach((el) => el.classList.remove('active'));
-        document.querySelectorAll('[id^="btn-"]').forEach((btn) => {
+      function highlightCurriculumButton(activeKey) {
+        curriculumButtons.forEach((btn) => {
           btn.classList.remove('bg-chroma-blue', 'text-white', 'shadow-soft');
-          btn.classList.add('text-brand-ink/60');
+          btn.classList.add('bg-white', 'text-brand-ink/70', 'border', 'border-chroma-blue/20');
+          if (btn.id === 'btn-cur-' + activeKey) {
+            btn.classList.add('bg-chroma-blue', 'text-white', 'shadow-soft');
+            btn.classList.remove('text-brand-ink/70');
+          }
         });
-        const activeContent = document.getElementById('tab-' + tabName);
-        const activeBtn = document.getElementById('btn-' + tabName);
+      }
+
+      window.updateCurriculum = function (key) {
+        const cfg = curriculumConfig[key];
+        if (!cfg) return;
+        if (curriculumChart) {
+          curriculumChart.data.datasets[0].data = cfg.data;
+          curriculumChart.data.datasets[0].borderColor = cfg.color;
+          curriculumChart.data.datasets[0].backgroundColor = cfg.color + '33';
+          curriculumChart.data.datasets[0].pointBorderColor = cfg.color;
+          curriculumChart.update();
+        }
+        if (curriculumTitle) curriculumTitle.textContent = cfg.title;
+        if (curriculumDesc) curriculumDesc.textContent = cfg.desc;
+        highlightCurriculumButton(key);
+      };
+
+      updateCurriculum('infant');
+
+        function switchTabInternal(tabName) {
+          document.querySelectorAll('.tab-content').forEach((el) => el.classList.remove('active'));
+          document.querySelectorAll('.schedule-tab').forEach((btn) => {
+            btn.classList.remove('bg-chroma-blue', 'text-white', 'shadow-soft');
+            btn.classList.add('text-brand-ink/60');
+          });
+          const activeContent = document.getElementById('tab-' + tabName);
+          const activeBtn = document.getElementById('btn-' + tabName);
         if (activeContent) activeContent.classList.add('active');
         if (activeBtn) {
           activeBtn.classList.remove('text-brand-ink/60');
