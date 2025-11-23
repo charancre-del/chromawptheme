@@ -1,71 +1,162 @@
 <?php
 /**
- * Helper functions.
+ * Template tags and helpers
+ * Chroma Excellence Theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 
 /**
- * Safe wrapper to fetch custom fields without requiring ACF.
+ * Safe trimmed excerpt
+ *
+ * @param int $length
+ * @return string
  */
-function chroma_field(string $field, $post_id = null, $default = null)
-{
-    $value = null;
+function chroma_trimmed_excerpt( $length = 24 ) {
+    $text = get_the_excerpt();
 
-    if (function_exists('get_field')) {
-        $value = get_field($field, $post_id);
+    if ( ! $text ) {
+        $text = get_the_content();
+    }
+
+    $text = wp_strip_all_tags( $text );
+    $words = preg_split( '/\s+/', $text );
+
+    if ( count( $words ) > $length ) {
+        $words = array_slice( $words, 0, $length );
+        $text  = implode( ' ', $words ) . '…';
     } else {
-        $id    = $post_id ?: get_the_ID();
-        $value = get_post_meta($id, $field, true);
+        $text = implode( ' ', $words );
     }
 
-    if ($value === '' || $value === null) {
-        return $default;
-    }
-
-    return $value;
+    return esc_html( $text );
 }
 
-function chroma_cta(string $text, string $url, string $class = 'btn btn-primary'): string
-{
-    $text = apply_filters('chroma_cta_text', $text, $url);
-    $url  = apply_filters('chroma_cta_url', $url, $text);
-    return '<a class="' . esc_attr($class) . '" href="' . esc_url($url) . '" data-event="chroma_cta_click">' . esc_html($text) . '</a>';
-}
-
-function chroma_location_query_args(array $overrides = []): array
-{
-    $defaults = [
-        'post_type' => 'location',
-        'posts_per_page' => -1,
-        'orderby' => 'title',
-        'order' => 'ASC',
-    ];
-
-    return apply_filters('chroma_location_query_args', wp_parse_args($overrides, $defaults));
-}
 
 /**
- * Parents forms buttons shortcode.
+ * Eyebrow text (small label above titles)
+ *
+ * @param string $text
  */
-add_shortcode('chroma_parents_forms', function ($atts = []) {
-    $buttons = chroma_field('parents_buttons', get_the_ID(), []);
-    if (!$buttons) {
+function chroma_eyebrow( $text ) {
+    if ( ! $text ) return;
+    echo '<p class="text-xs font-semibold tracking-[0.12em] uppercase text-brand-gold mb-2">'
+        . esc_html( $text )
+        . '</p>';
+}
+
+
+/**
+ * Pagination for archives (Stories, Programs, etc.)
+ */
+function chroma_archive_pagination() {
+
+    global $wp_query;
+
+    if ( $wp_query->max_num_pages <= 1 ) return;
+
+    $big = 999999999;
+
+    $links = paginate_links([
+        'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+        'format'    => '?paged=%#%',
+        'current'   => max( 1, get_query_var( 'paged' ) ),
+        'total'     => $wp_query->max_num_pages,
+        'type'      => 'array',
+        'prev_text' => '&larr;',
+        'next_text' => '&rarr;',
+    ]);
+
+    if ( empty( $links ) || ! is_array( $links ) ) return;
+
+    echo '<nav class="mt-10 flex justify-center" aria-label="Pagination">';
+    echo '<ul class="inline-flex items-center gap-2 text-sm">';
+
+    foreach ( $links as $link ) {
+        // Add Tailwind classes
+        $class = 'min-w-[2.25rem] h-9 inline-flex items-center justify-center rounded-full px-3';
+
+        if ( strpos( $link, 'current' ) !== false ) {
+            $class .= ' bg-brand-navy text-white';
+            $link = str_replace( 'page-numbers current', $class, $link );
+        } elseif ( strpos( $link, 'prev' ) !== false || strpos( $link, 'next' ) !== false ) {
+            $class .= ' border border-slate-200 hover:border-brand-navy hover:text-brand-navy';
+            $link = str_replace( 'page-numbers', $class, $link );
+        } else {
+            $class .= ' border border-slate-200 hover:border-brand-navy hover:text-brand-navy';
+            $link = str_replace( 'page-numbers', $class, $link );
+        }
+
+        echo '<li>' . $link . '</li>';
+    }
+
+    echo '</ul>';
+    echo '</nav>';
+}
+
+
+/**
+ * Print a location's formatted address (one-line)
+ *
+ * @param int|\WP_Post|null $post
+ */
+function chroma_location_address_line( $post = null ) {
+    if ( ! function_exists( 'get_field' ) ) return;
+
+    $post = get_post( $post );
+    if ( ! $post || $post->post_type !== 'location' ) return;
+
+    $street = get_field( 'location_address', $post->ID );
+    $city   = get_field( 'location_city', $post->ID );
+    $state  = get_field( 'location_state', $post->ID );
+    $zip    = get_field( 'location_zip', $post->ID );
+
+    $parts = array_filter([
+        $street,
+        $city,
+        $state,
+        $zip,
+    ]);
+
+    if ( empty( $parts ) ) return;
+
+    echo esc_html( implode( ', ', $parts ) );
+}
+
+
+/**
+ * Get city + state string for a location
+ *
+ * @param int|\WP_Post|null $post
+ * @return string
+ */
+function chroma_location_city_state( $post = null ) {
+    if ( ! function_exists( 'get_field' ) ) return '';
+
+    $post = get_post( $post );
+    if ( ! $post || $post->post_type !== 'location' ) return '';
+
+    $city  = get_field( 'location_city', $post->ID );
+    $state = get_field( 'location_state', $post->ID );
+
+    if ( ! $city && ! $state ) {
         return '';
     }
-    ob_start();
-    ?>
-    <div class="parents-buttons__list">
-        <?php foreach ($buttons as $button) :
-            $label = $button['label'] ?? '';
-            $url   = $button['url'] ?? '';
-            if (!$label || !$url) {
-                continue;
-            }
-            ?>
-            <a class="btn btn-secondary" href="<?php echo esc_url($url); ?>" data-event="chroma_cta_click">
-                <?php echo esc_html($label); ?>
-            </a>
-        <?php endforeach; ?>
-    </div>
-    <?php
-    return ob_get_clean();
-});
+
+    $parts = array_filter([ $city, $state ]);
+    return implode( ', ', $parts );
+}
+
+
+/**
+ * Simple utility: render a badge
+ *
+ * @param string $text
+ */
+function chroma_badge( $text ) {
+    if ( ! $text ) return;
+    echo '<span class="inline-flex items-center rounded-full bg-brand-cream px-3 py-1 text-xs font-medium text-brand-navy">'
+        . esc_html( $text )
+        . '</span>';
+}
