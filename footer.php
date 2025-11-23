@@ -6,6 +6,7 @@
  */
 ?>
 <?php wp_footer(); ?>
+<?php if (is_front_page()) : ?>
 <!-- Chart.js for curriculum radar -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -354,5 +355,6 @@
     })();
   });
 </script>
+<?php endif; ?>
 </body>
 </html>
