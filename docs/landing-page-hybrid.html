@@ -76,6 +76,9 @@
     .tab-content { display: none; animation: fadeIn .45s ease; }
     .tab-content.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity:1; transform: translateY(0);} }
+    .fan-blade { transition: transform .4s ease, box-shadow .3s ease, background-color .3s ease, color .3s ease; transform-origin: bottom center; }
+    .fan-blade:hover { transform: scale(1.03) rotate(var(--rotate,0deg)); box-shadow: 0 20px 50px -18px rgba(74,108,124,0.28); }
+    .fan-blade.active { background: #2F4858; color: #fff; box-shadow: 0 22px 50px -18px rgba(74,108,124,0.4); }
   </style>
 </head>
 <body class="bg-brand-cream text-brand-ink antialiased selection:bg-chroma-red selection:text-white">
@@ -141,10 +144,10 @@
             19+ Metro Atlanta Locations
           </div>
           <h1 class="font-serif text-brand-ink text-[2.8rem] sm:text-[3.4rem] leading-tight tracking-tight">
-            A modern, beautiful <span class="text-chroma-red">early learning experience</span> built for parents who expect more.
+            The art of <span class="italic text-chroma-red">growing up.</span>
           </h1>
           <p class="text-[15px] leading-relaxed text-brand-ink/70 max-w-xl">
-            Chroma combines a research-based <strong>Chroma Spectrum™ curriculum</strong>, warm experienced teachers, and beautifully prepared environments for children <strong>6 weeks to 12 years</strong>.
+            Where accredited excellence meets the warmth of home. The Prismpath™ approach blends the Chroma Spectrum™ curriculum, trusted teachers, and luminous spaces so children <strong>6 weeks to 12 years</strong> grow with confidence.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
             <a href="#tour" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-chroma-red text-white text-xs font-semibold uppercase tracking-[0.22em] shadow-soft hover:bg-chroma-red/90">Schedule a Tour</a>
@@ -245,6 +248,40 @@
             <div class="flex justify-center gap-5 text-xs">
               <button type="button" onclick="resetWizard()" class="text-brand-ink/50 hover:text-brand-ink underline decoration-dotted">Start Over</button>
               <a href="#tour" class="inline-flex items-center justify-center px-5 py-2 rounded-full bg-chroma-red text-white font-semibold hover:bg-chroma-red/90 transition">Talk to a Director</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="curriculum-fan" class="py-20 bg-white border-b border-chroma-blue/10">
+      <div class="max-w-6xl mx-auto px-4 lg:px-6 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-5 fade-in-up">
+          <span class="text-chroma-red font-bold tracking-[0.2em] text-[11px] uppercase">Curriculum Fan</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-ink">The art of growing up, translated into daily practice.</h2>
+          <p class="text-brand-ink/70 text-sm md:text-base">Each Chroma program balances physical, emotional, social, academic, and creative growth. Tap a blade of the fan to see how Prismpath™ tunes the focus for every age.</p>
+          <ul class="space-y-3 text-sm text-brand-ink/70">
+            <li class="flex items-start gap-2"><span class="text-chroma-red mt-0.5">●</span>Age-specific focus built from the Prismpath™ spectrum.</li>
+            <li class="flex items-start gap-2"><span class="text-chroma-blue mt-0.5">●</span>Language, numeracy, and creative thinking woven into play.</li>
+            <li class="flex items-start gap-2"><span class="text-chroma-green mt-0.5">●</span>Emotional security and social confidence at every stage.</li>
+          </ul>
+        </div>
+        <div class="relative h-[360px] fade-in-up">
+          <div class="absolute inset-0 flex items-end justify-center pointer-events-none">
+            <div class="w-full max-w-md bg-white border border-chroma-blue/15 shadow-soft rounded-[2rem] p-6 text-center">
+              <p class="text-[11px] uppercase tracking-[0.22em] font-semibold text-brand-ink/60" id="fan-focus-label">Foundation</p>
+              <h3 class="font-serif text-2xl font-bold text-brand-ink mt-2" id="fan-title">Infant Care</h3>
+              <p class="text-sm text-brand-ink/70 mt-3" id="fan-desc">Low ratios, safe sleep practices, responsive caregiving, and sensory play in a peaceful, predictable environment.</p>
+            </div>
+          </div>
+          <div class="absolute inset-0 flex items-end justify-center">
+            <div class="relative w-full max-w-lg h-full flex items-end justify-center">
+              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:-26deg; transform: rotate(-26deg) translateY(0);" data-fan-program="infant">Infant</button>
+              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:-14deg; transform: rotate(-14deg) translateY(0);" data-fan-program="toddler">Toddler</button>
+              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:0deg; transform: rotate(0deg) translateY(0);" data-fan-program="preschool">Preschool</button>
+              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:14deg; transform: rotate(14deg) translateY(0);" data-fan-program="prep">Pre-K Prep</button>
+              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:26deg; transform: rotate(26deg) translateY(0);" data-fan-program="prek">GA Pre-K</button>
+              <button class="fan-blade absolute bottom-10 px-4 py-3 rounded-2xl bg-white border border-chroma-blue/15 text-sm font-semibold shadow-soft" style="--rotate:38deg; transform: rotate(38deg) translateY(0);" data-fan-program="afterschool">After School</button>
             </div>
           </div>
         </div>
@@ -609,27 +646,33 @@
       const programs = {
         infant: {
           title: 'Infant Care (6 weeks–12 months)',
-          desc: 'Low ratios, safe sleep practices, responsive caregiving, and sensory play in a peaceful, predictable environment.'
+          desc: 'Low ratios, safe sleep practices, responsive caregiving, and sensory play in a peaceful, predictable environment.',
+          focus: 'Foundation'
         },
         toddler: {
           title: 'Toddler Program (1 year)',
-          desc: 'Curated environments for walkers and explorers with language bursts and social skills.'
+          desc: 'Curated environments for walkers and explorers with language bursts and social skills.',
+          focus: 'Discovery'
         },
         preschool: {
           title: 'Preschool (2 years)',
-          desc: 'Early concepts in math, literacy, and science introduced through hands-on centers and guided play.'
+          desc: 'Early concepts in math, literacy, and science introduced through hands-on centers and guided play.',
+          focus: 'Exploration'
         },
         prep: {
           title: 'Pre-K Prep (3 years)',
-          desc: 'Structured centers and small-group instruction that build independence before GA Pre-K.'
+          desc: 'Structured centers and small-group instruction that build independence before GA Pre-K.',
+          focus: 'Independence'
         },
         prek: {
           title: 'GA Pre-K (4 years)',
-          desc: 'Balanced academic readiness, social-emotional learning, and joyful experiences aligned with GA standards.'
+          desc: 'Balanced academic readiness, social-emotional learning, and joyful experiences aligned with GA standards.',
+          focus: 'Readiness'
         },
         afterschool: {
           title: 'After-School Program (5–12 years)',
-          desc: 'Transportation from local schools, homework support, clubs, and outdoor play.'
+          desc: 'Transportation from local schools, homework support, clubs, and outdoor play.',
+          focus: 'Enrichment'
         }
       };
 
@@ -653,6 +696,31 @@
         wizardStep.classList.remove('hidden');
         wizardResult.classList.add('hidden');
       };
+
+      const fanButtons = document.querySelectorAll('[data-fan-program]');
+      const fanTitle = document.getElementById('fan-title');
+      const fanDesc = document.getElementById('fan-desc');
+      const fanLabel = document.getElementById('fan-focus-label');
+
+      function setFanProgram(key) {
+        const program = programs[key];
+        if (!program || !fanButtons.length || !fanTitle || !fanDesc || !fanLabel) return;
+        fanButtons.forEach((btn) => {
+          btn.classList.remove('active');
+          if (btn.dataset.fanProgram === key) {
+            btn.classList.add('active');
+          }
+        });
+        fanTitle.textContent = program.title;
+        fanDesc.textContent = program.desc;
+        fanLabel.textContent = program.focus || 'Curriculum';
+      }
+
+      fanButtons.forEach((btn) => {
+        btn.addEventListener('click', () => setFanProgram(btn.dataset.fanProgram));
+      });
+
+      setFanProgram('infant');
 
       function switchTabInternal(tabName) {
         document.querySelectorAll('.tab-content').forEach((el) => el.classList.remove('active'));
