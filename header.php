@@ -9,21 +9,21 @@
 <html <?php language_attributes(); ?>>
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
-  <title>Chroma Early Learning Academy | Premium Childcare in Metro Atlanta</title>
+  <title>Chroma | Prismpath™ Early Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Chroma Early Learning Academy offers premium childcare and early education for infants through school-age in Metro Atlanta. 19+ locations, GA Pre-K, research-based Chroma Spectrum™ curriculum, and exceptional parent communication." />
+  <meta name="description" content="Chroma Early Learning Academy blends the Prismpath™ approach with modern spaces, premium care, and kindergarten readiness across Metro Atlanta." />
   <meta name="robots" content="index,follow" />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Chroma Early Learning Academy | Metro Atlanta Childcare &amp; GA Pre-K" />
-  <meta property="og:description" content="Modern, research-based childcare for ages 6 weeks–12 years across Metro Atlanta. 19+ neighborhood campuses, GA Pre-K, warm teachers, and beautiful classrooms." />
+  <meta property="og:title" content="Chroma | Prismpath™ Early Learning" />
+  <meta property="og:description" content="Premium childcare and early learning powered by the Prismpath™ approach across Metro Atlanta." />
   <meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>" />
   <meta property="og:site_name" content="Chroma Early Learning Academy" />
   <meta property="og:image" content="<?php echo esc_url(home_url('/og-image.jpg')); ?>" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Chroma Early Learning Academy | Metro Atlanta Childcare &amp; GA Pre-K" />
-  <meta name="twitter:description" content="Modern early learning experience for infants through after school in Metro Atlanta." />
+  <meta name="twitter:title" content="Chroma | Prismpath™ Early Learning" />
+  <meta name="twitter:description" content="Premium childcare and early learning powered by the Prismpath™ approach across Metro Atlanta." />
   <link rel="canonical" href="<?php echo esc_url(home_url('/')); ?>" />
   <!-- Favicon (replace href paths as needed) -->
   <link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url(home_url('/favicon-32x32.png')); ?>" />
@@ -31,30 +31,43 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- Tailwind Config -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
+            sans: ['Outfit', 'system-ui', 'sans-serif'],
             serif: ['Playfair Display', 'ui-serif', 'Georgia', 'serif'],
           },
           colors: {
             brand: {
+              ink: '#263238',
+              cream: '#FFFCF8',
               navy: '#0f172a',
               slate: '#0f172a',
-              cream: '#fdfaf3'
             },
-            chroma: {
-              teal: '#0d9488',
-              pink: '#be185d',
-              orange: '#ea580c',
-              purple: '#7c3aed',
-              yellow: '#ca8a04'
-            }
-          },
+              chroma: {
+                red: '#D67D6B',
+                redLight: '#F4E5E2',
+                blue: '#4A6C7C',
+                blueDark: '#2F4858',
+                blueLight: '#E3E9EC',
+                green: '#8DA399',
+                greenLight: '#E3EBE8',
+                yellow: '#E6BE75',
+                yellowLight: '#FDF6E3',
+                teal: '#0d9488',
+                pink: '#be185d',
+                orange: '#ea580c',
+                purple: '#7c3aed',
+                gold: '#ca8a04'
+              }
+            },
           boxShadow: {
             soft: '0 18px 45px rgba(15,23,42,0.16)'
           },
@@ -75,7 +88,7 @@
   <!-- Global Styles -->
   <style>
     body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -107,5 +120,5 @@
   </script>
   <?php wp_head(); ?>
 </head>
-<body <?php body_class('bg-brand-cream text-brand-navy overflow-x-hidden'); ?>>
+<body <?php body_class('bg-brand-cream text-brand-ink overflow-x-hidden'); ?>>
 <?php wp_body_open(); ?>

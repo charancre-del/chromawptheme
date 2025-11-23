@@ -92,31 +92,41 @@
       const wizardResult = document.getElementById('wizard-result');
       const wizardTitle = document.getElementById('wizard-title');
       const wizardDesc = document.getElementById('wizard-desc');
+      const wizardLearn = document.getElementById('wizard-learn');
+      const wizardEnroll = document.getElementById('wizard-enroll');
       if (!wizardStep || !wizardResult || !wizardTitle || !wizardDesc) return;
+      const programArchive = '<?php echo esc_url(get_post_type_archive_link('program')); ?>';
+      const enrollmentUrl = '<?php echo esc_url(home_url('#tour')); ?>';
       const programs = {
         infant: {
           title: 'Infant Care (6 weeks–12 months)',
-          desc: 'Low ratios, safe sleep practices, responsive caregiving, and sensory play in a peaceful, predictable environment. We partner closely with you on feeding and sleep routines.'
+          desc: 'Low ratios, safe sleep practices, responsive caregiving, and sensory play in a peaceful, predictable environment. We partner closely with you on feeding and sleep routines.',
+          link: programArchive ? programArchive + '#infant' : '#programs'
         },
         toddler: {
           title: 'Toddler Program (1 year)',
-          desc: 'Curated environments for walkers and explorers: language bursts, social skills, early problem-solving, and lots of gross-motor play.'
+          desc: 'Curated environments for walkers and explorers: language bursts, social skills, early problem-solving, and lots of gross-motor play.',
+          link: programArchive ? programArchive + '#toddler' : '#programs'
         },
         preschool: {
           title: 'Preschool (2 years)',
-          desc: 'Early concepts in math, literacy, and science are introduced through hands-on centers, circle time, and guided play. Potty training support is built into the day.'
+          desc: 'Early concepts in math, literacy, and science are introduced through hands-on centers, circle time, and guided play. Potty training support is built into the day.',
+          link: programArchive ? programArchive + '#preschool' : '#programs'
         },
         prep: {
           title: 'Pre-K Prep (3 years)',
-          desc: 'Structured centers, small-group instruction, and routines that build independence, self-regulation, and confidence before GA Pre-K.'
+          desc: 'Structured centers, small-group instruction, and routines that build independence, self-regulation, and confidence before GA Pre-K.',
+          link: programArchive ? programArchive + '#prep' : '#programs'
         },
         prek: {
           title: 'GA Pre-K (4 years)',
-          desc: 'GA Lottery Pre-K aligned with state standards, taught by qualified teachers who balance academic readiness, social-emotional learning, and joyful experiences.'
+          desc: 'GA Lottery Pre-K aligned with state standards, taught by qualified teachers who balance academic readiness, social-emotional learning, and joyful experiences.',
+          link: programArchive ? programArchive + '#prek' : '#programs'
         },
         afterschool: {
           title: 'After-School Program (5–12 years)',
-          desc: 'Transportation from local elementary schools, homework support, STEM and art clubs, outdoor play, and a safe place to unwind after the school day.'
+          desc: 'Transportation from local elementary schools, homework support, STEM and art clubs, outdoor play, and a safe place to unwind after the school day.',
+          link: programArchive ? programArchive + '#afterschool' : '#programs'
         }
       };
       window.showWizardResult = function (ageKey) {
@@ -126,6 +136,12 @@
         wizardResult.classList.remove('hidden');
         wizardTitle.textContent = program.title;
         wizardDesc.textContent = program.desc;
+        if (wizardLearn && program.link) {
+          wizardLearn.href = program.link;
+        }
+        if (wizardEnroll) {
+          wizardEnroll.href = enrollmentUrl || '#tour';
+        }
       };
       window.resetWizard = function () {
         wizardStep.classList.remove('hidden');
