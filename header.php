@@ -9,7 +9,6 @@
 <html <?php language_attributes(); ?>>
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
-  <title>Chroma | Prismpath™ Early Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Chroma Early Learning Academy blends the Prismpath™ approach with modern spaces, premium care, and kindergarten readiness across Metro Atlanta." />
   <meta name="robots" content="index,follow" />
