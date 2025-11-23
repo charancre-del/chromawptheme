@@ -1,0 +1,22 @@
+{
+  "key": "group_chroma_map_data",
+  "title": "Map Data",
+  "fields": [],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "chroma-settings"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Placeholder group for map data imports, GeoJSON references, and nearby schools markers."
+}
