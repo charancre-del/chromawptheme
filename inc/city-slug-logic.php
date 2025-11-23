@@ -7,8 +7,8 @@ action_hook_once('save_post_location', function ($post_id, $post, $update) {
     if (wp_is_post_revision($post_id) || defined('DOING_AUTOSAVE')) {
         return;
     }
-    $city  = get_field('address_city', $post_id) ?: get_post_meta($post_id, 'address_city', true);
-    $state = get_field('address_state', $post_id) ?: get_post_meta($post_id, 'address_state', true);
+    $city  = chroma_field('address_city', $post_id);
+    $state = chroma_field('address_state', $post_id);
     if (!$city || !$state) {
         return;
     }

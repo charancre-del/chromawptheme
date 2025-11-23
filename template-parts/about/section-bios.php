@@ -2,7 +2,7 @@
 /**
  * Bios repeater section.
  */
-$bios = get_field('team_bios');
+$bios = chroma_field('team_bios', get_the_ID(), []);
 if (!$bios) {
     return;
 }

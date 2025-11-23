@@ -2,7 +2,7 @@
 /**
  * Schools served section.
  */
-$schools = get_field('schools_served') ?: [];
+$schools = chroma_field('schools_served', get_the_ID(), []);
 if (!$schools) {
     return;
 }

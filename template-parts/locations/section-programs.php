@@ -2,7 +2,7 @@
 /**
  * Programs offered at this location.
  */
-$programs = get_field('programs_offered');
+$programs = chroma_field('programs_offered', get_the_ID(), []);
 if (!$programs) {
     return;
 }

@@ -20,8 +20,8 @@ function chroma_location_schema(): string
         return '';
     }
 
-    $address = get_field('address', $location->ID) ?: [];
-    $geo     = get_field('geo_coordinates', $location->ID) ?: [];
+    $address = chroma_field('address', $location->ID, []);
+    $geo     = chroma_field('geo_coordinates', $location->ID, []);
 
     $data = [
         '@context' => 'https://schema.org',

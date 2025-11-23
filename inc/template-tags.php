@@ -3,6 +3,27 @@
  * Helper functions.
  */
 
+/**
+ * Safe wrapper to fetch custom fields without requiring ACF.
+ */
+function chroma_field(string $field, $post_id = null, $default = null)
+{
+    $value = null;
+
+    if (function_exists('get_field')) {
+        $value = get_field($field, $post_id);
+    } else {
+        $id    = $post_id ?: get_the_ID();
+        $value = get_post_meta($id, $field, true);
+    }
+
+    if ($value === '' || $value === null) {
+        return $default;
+    }
+
+    return $value;
+}
+
 function chroma_cta(string $text, string $url, string $class = 'btn btn-primary'): string
 {
     $text = apply_filters('chroma_cta_text', $text, $url);
@@ -26,7 +47,7 @@ function chroma_location_query_args(array $overrides = []): array
  * Parents forms buttons shortcode.
  */
 add_shortcode('chroma_parents_forms', function ($atts = []) {
-    $buttons = get_field('parents_buttons', get_the_ID()) ?: [];
+    $buttons = chroma_field('parents_buttons', get_the_ID(), []);
     if (!$buttons) {
         return '';
     }
