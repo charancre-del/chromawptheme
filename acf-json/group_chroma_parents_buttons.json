@@ -1,0 +1,22 @@
+{
+  "key": "group_chroma_parents_buttons",
+  "title": "Parents Page Buttons",
+  "fields": [],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "page-parents.php"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Placeholder group for configurable parent portal buttons and CTA links."
+}

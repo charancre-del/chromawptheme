@@ -1,0 +1,22 @@
+{
+  "key": "group_chroma_stories_seo",
+  "title": "Stories SEO",
+  "fields": [],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "stories"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Placeholder group for article-level SEO metadata and schema."
+}

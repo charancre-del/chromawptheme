@@ -1,0 +1,146 @@
+{
+    "key": "group_chroma_home",
+    "title": "Homepage Flexible Content",
+    "fields": [
+        {
+            "key": "field_chroma_home_flex",
+            "label": "Home Flexible Content",
+            "name": "home_flexible_content",
+            "type": "flexible_content",
+            "layouts": [
+                {
+                    "key": "layout_chroma_hero",
+                    "name": "hero",
+                    "label": "Hero",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_chroma_hero_badge", "label": "Badge", "name": "badge_text", "type": "text"},
+                        {"key": "field_chroma_hero_heading", "label": "Heading", "name": "heading", "type": "textarea"},
+                        {"key": "field_chroma_hero_highlight", "label": "Highlight", "name": "highlight", "type": "text"},
+                        {"key": "field_chroma_hero_body", "label": "Body", "name": "body", "type": "textarea"},
+                        {"key": "field_chroma_hero_cta_primary", "label": "Primary CTA", "name": "primary_cta", "type": "link", "return_format": "array"},
+                        {"key": "field_chroma_hero_cta_secondary", "label": "Secondary CTA", "name": "secondary_cta", "type": "link", "return_format": "array"}
+                    ]
+                },
+                {
+                    "key": "layout_chroma_stats",
+                    "name": "stats_strip",
+                    "label": "Stats Strip",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_chroma_stats_items",
+                            "label": "Stats Items",
+                            "name": "items",
+                            "type": "repeater",
+                            "sub_fields": [
+                                {"key": "field_chroma_stats_value", "label": "Value", "name": "value", "type": "text"},
+                                {"key": "field_chroma_stats_label", "label": "Label", "name": "label", "type": "text"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "layout_chroma_programs",
+                    "name": "programs",
+                    "label": "Programs Wizard",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_chroma_programs_heading", "label": "Heading", "name": "heading", "type": "text"},
+                        {"key": "field_chroma_programs_intro", "label": "Intro", "name": "intro", "type": "textarea"}
+                    ]
+                },
+                {
+                    "key": "layout_chroma_curriculum",
+                    "name": "curriculum",
+                    "label": "Curriculum",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_chroma_curriculum_kicker", "label": "Kicker", "name": "kicker", "type": "text"},
+                        {"key": "field_chroma_curriculum_heading", "label": "Heading", "name": "heading", "type": "text"},
+                        {"key": "field_chroma_curriculum_body", "label": "Body", "name": "body", "type": "textarea"}
+                    ]
+                },
+                {
+                    "key": "layout_chroma_schedule",
+                    "name": "schedule",
+                    "label": "Schedule",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_chroma_schedule_heading", "label": "Heading", "name": "heading", "type": "text"},
+                        {"key": "field_chroma_schedule_intro", "label": "Intro", "name": "intro", "type": "textarea"}
+                    ]
+                },
+                {
+                    "key": "layout_chroma_reviews",
+                    "name": "reviews",
+                    "label": "Reviews",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_chroma_reviews_heading", "label": "Heading", "name": "heading", "type": "text"},
+                        {"key": "field_chroma_reviews_subheading", "label": "Subheading", "name": "subheading", "type": "text"}
+                    ]
+                },
+                {
+                    "key": "layout_chroma_locations",
+                    "name": "locations",
+                    "label": "Locations",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_chroma_locations_heading", "label": "Heading", "name": "heading", "type": "text"},
+                        {"key": "field_chroma_locations_intro", "label": "Intro", "name": "intro", "type": "textarea"}
+                    ]
+                },
+                {
+                    "key": "layout_chroma_tour",
+                    "name": "tour",
+                    "label": "Tour CTA",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_chroma_tour_heading", "label": "Heading", "name": "heading", "type": "text"},
+                        {"key": "field_chroma_tour_intro", "label": "Intro", "name": "intro", "type": "textarea"}
+                    ]
+                },
+                {
+                    "key": "layout_chroma_faq",
+                    "name": "faq",
+                    "label": "FAQ",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_chroma_faq_heading", "label": "Heading", "name": "heading", "type": "text"},
+                        {"key": "field_chroma_faq_intro", "label": "Intro", "name": "intro", "type": "textarea"},
+                        {
+                            "key": "field_chroma_faq_items",
+                            "label": "FAQ Items",
+                            "name": "items",
+                            "type": "repeater",
+                            "sub_fields": [
+                                {"key": "field_chroma_faq_question", "label": "Question", "name": "question", "type": "text"},
+                                {"key": "field_chroma_faq_answer", "label": "Answer", "name": "answer", "type": "textarea"}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1733184000
+}

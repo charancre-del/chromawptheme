@@ -1,0 +1,13 @@
+/*
+Theme Name: Chroma Early Learning Academy
+Theme URI: https://chromaela.com
+Author: Project Team
+Description: Classic WordPress theme for Chroma ELA with ACF Flexible Content, Programs/Locations/Stories CPTs, Tailwind build, and SEO automation.
+Version: 0.1.0
+Requires at least: 6.5
+Tested up to: 6.5
+Requires PHP: 7.4
+Text Domain: chroma
+*/
+
+/* This file intentionally keeps minimal CSS because Tailwind/PostCSS output is enqueued via functions.php. */
