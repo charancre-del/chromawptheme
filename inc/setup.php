@@ -1,48 +1,111 @@
 <?php
 /**
- * Theme setup.
+ * Theme Setup
+ * Chroma Excellence Theme
  */
 
-action_hook_once('after_setup_theme', function () {
-    load_theme_textdomain('chroma', get_template_directory() . '/languages');
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-    add_theme_support('title-tag');
-    add_theme_support('post-thumbnails');
-    add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'script', 'style']);
-    add_theme_support('editor-styles');
-    add_theme_support('automatic-feed-links');
+add_action( 'after_setup_theme', 'chroma_excellence_theme_setup' );
+function chroma_excellence_theme_setup() {
 
+    // Let WordPress handle document <title> tag
+    add_theme_support( 'title-tag' );
+
+    // Add support for post thumbnails
+    add_theme_support( 'post-thumbnails' );
+
+    // Custom logo
+    add_theme_support( 'custom-logo', [
+        'height'      => 120,
+        'width'       => 120,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ]);
+
+    // Better markup
+    add_theme_support( 'html5', [
+        'comment-list',
+        'comment-form',
+        'gallery',
+        'caption',
+        'script',
+        'style',
+        'navigation-widgets',
+        'search-form',
+    ]);
+
+    // Theme translations
+    load_theme_textdomain( 'chroma', get_template_directory() . '/languages' );
+
+    // Editor styles
+    add_editor_style( 'assets/css/main.css' );
+
+    // Register nav menus
     register_nav_menus([
-        'primary' => __('Primary Menu', 'chroma'),
-        'utility' => __('Utility Menu', 'chroma'),
+        'primary'   => __( 'Primary Menu', 'chroma' ),
+        'footer'    => __( 'Footer Menu', 'chroma' ),
+        'topmenu'   => __( 'Top Utility Menu', 'chroma' ),
     ]);
 
-    add_image_size('chroma-card', 800, 600, true);
-    add_image_size('chroma-hero', 1600, 900, true);
+    // Image sizes for Chroma
+    add_image_size( 'chroma_thumb', 480, 320, true );
+    add_image_size( 'chroma_square', 600, 600, true );
+    add_image_size( 'chroma_wide', 1200, 600, true );
+    add_image_size( 'chroma_hero', 1800, 900, true );
+}
 
-    register_sidebar([
-        'name' => __('Footer Column 1', 'chroma'),
-        'id' => 'footer-1',
-        'before_widget' => '<section class="widget footer-widget">',
-        'after_widget' => '</section>',
-        'before_title' => '<h2 class="widget-title">',
-        'after_title' => '</h2>',
-    ]);
 
-    register_sidebar([
-        'name' => __('Footer Column 2', 'chroma'),
-        'id' => 'footer-2',
-        'before_widget' => '<section class="widget footer-widget">',
-        'after_widget' => '</section>',
-        'before_title' => '<h2 class="widget-title">',
-        'after_title' => '</h2>',
-    ]);
-});
+// ---------------------------------------------------------
+// DISABLE UNNEEDED WP FEATURES FOR PERFORMANCE
+// ---------------------------------------------------------
 
-/**
- * Helper to run anonymous callbacks once for an action.
- */
-function action_hook_once(string $hook, callable $callback, int $priority = 10): void
-{
-    add_action($hook, $callback, $priority);
+add_action( 'init', 'chroma_excellence_cleanup_wp' );
+function chroma_excellence_cleanup_wp() {
+
+    // Remove emoji scripts/styles
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );
+
+    // Remove oEmbed junk
+    remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+    remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+
+    // Remove RSD link
+    remove_action( 'wp_head', 'rsd_link' );
+
+    // Remove WLW manifest
+    remove_action( 'wp_head', 'wlwmanifest_link' );
+
+    // Remove shortlink
+    remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+
+    // Disable REST output in head
+    remove_action( 'wp_head', 'rest_output_link_wp_head' );
+
+    // Remove generator meta tag
+    remove_action( 'wp_head', 'wp_generator' );
+}
+
+
+// ---------------------------------------------------------
+// ACF LOCAL JSON SUPPORT
+// ---------------------------------------------------------
+add_filter( 'acf/settings/save_json', 'chroma_acf_json_save_point' );
+function chroma_acf_json_save_point( $path ) {
+    return get_template_directory() . '/acf-json';
+}
+
+add_filter( 'acf/settings/load_json', 'chroma_acf_json_load_point' );
+function chroma_acf_json_load_point( $paths ) {
+
+    // Remove original path
+    unset( $paths[0] );
+
+    // Add our theme directory
+    $paths[] = get_template_directory() . '/acf-json';
+
+    return $paths;
 }
